@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
-# SaberBot by Alex Taber and Megumi
-# Copyright 2016 Alex Taber, Megumi
+# SaberBot by Alex Taber and Megumi Sonoda
+# Copyright 2016 Alex Taber, Megumi Sonoda
 # This file is licensed under the MIT License
 
 require 'discordrb'
@@ -11,7 +11,7 @@ require 'yaml'
 Config = YAML.load_file('config.yml')
 Roles = YAML.load_file('staff.yml')
 
-## These hashes hold the settings for server/channel specific value
+## These hashes hold the settings for server/channel specific values
 slowmode_counters = Hash.new  # Stores the current number of messages per second for a slowmode-enabled channel
 slowmode_maxmsgs  = Hash.new  # Stores the maximum amount of messages per second for a slowmode-enabled channel
 logchannels       = Hash.new  # Stores server-specific log channel objects
