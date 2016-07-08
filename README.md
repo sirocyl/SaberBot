@@ -6,5 +6,5 @@ TBD
 
 ## Credits
 * Alex Taber (astronautlevel2)
-* Megumi
+* Megumi Sonoda (github.com/megumisonoda, twitter.com/dreamyspell)
 * meew0 for discordrb
