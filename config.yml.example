@@ -1,0 +1,21 @@
+auth_token: <Discord Bot Auth Token>
+app_id: <Discord Client/Application ID>
+command_prefix: "!"
+game_string: "Powered by Ruby!"
+everyone_role: "@everyone"
+probation_role: "Probation"
+noembed_role: "No-Embed"
+mute_role: "Muted"
+staff_role: "Staff"
+halfop_role: "HalfOP"
+op_role: "OP"
+sop_role: "SuperOP"
+admin_role: "Owner"
+log_channel: <action logging channel>
+banlog_channel: <ban channel>
+log_url: <logs url>
+ignored_channels:
+ - mods
+ - bans
+ - newcomers
+autuprobate: false
