@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
+# SaberBot by Alex Taber and Megumi
+# Copyright 2016 Alex Taber, Megumi
+# This file is licensed under the MIT License
+
 require 'discordrb'
 require 'yaml'
 
