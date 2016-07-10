@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+# SaberBot by Alex Taber and Megumi Sonoda
+# Copyright 2016 Alex Taber, Megumi Sonoda
+# This file is licensed under the MIT License
+
+module SaberBot
+  def SaberBot.slowmodeloop
+    Thread.new {
+      loop do
+        sleep(1)
+        Slowmode_counters.each do |channel, counter|
+          Slowmode_counters[channel] = 0
+        end
+      end
+    }
+  end
+end

@@ -18,4 +18,4 @@ ignored_channels:
  - mods
  - bans
  - newcomers
-autuprobate: false
+autoprobate: false
