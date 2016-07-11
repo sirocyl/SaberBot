@@ -17,7 +17,7 @@ module SaberBot
       command(:unsudo, description: "Deelevate permissions. Staff only.", permission_level: 1) do |event|
         role = event.server.role(Roles[event.message.author.id])
         event.message.author.remove_role(role)
-        "Deelevated #{event.message.author.mention} from #{role.name}."
+        "De-elevated #{event.message.author.mention} from #{role.name}."
       end
     end
   end
