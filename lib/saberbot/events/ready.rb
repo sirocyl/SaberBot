@@ -17,9 +17,9 @@ module SaberBot
         BotObject.servers.each do |key, server|
           server.roles.each do |role|
             if role.name == Config["staff_role"]
-              BotObject.set_role_permission(role.id, 1)  # Staff users should have permission to staff-level commands
+              BotObject.set_role_permission(role.id, 1)
             elsif role.name == Config["admin_role"]
-              BotObject.set_role_permission(role.id, 2)  # Admin users should have permission to admin-level commands
+              BotObject.set_role_permission(role.id, 2)
             end
             Server_roles[server][role.name] = role
           end

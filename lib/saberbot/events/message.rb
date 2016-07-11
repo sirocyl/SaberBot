@@ -7,14 +7,13 @@
 
 module SaberBot
   module Event
-    # Increase the slowmode counter on affected channels
     module SlowmodeCounter
       extend Discordrb::EventContainer
-      message do |event|                                                      # When a channel receives a message...
-        if Slowmode_counters.key? event.channel                                   # If this channel is in slowmode...
-          Slowmode_counters[event.channel] += 1                                   # add 1 to its counter...
-          if Slowmode_counters[event.channel] > Slowmode_maxmsgs[event.channel]  # If this message is over the slowmode limit...
-            event.message.delete                                                  # then delete it.
+      message do |event|
+        if Slowmode_counters.key? event.channel
+          Slowmode_counters[event.channel] += 1
+          if Slowmode_counters[event.channel] > Slowmode_maxmsgs[event.channel]
+            event.message.delete
           end
         end
       end

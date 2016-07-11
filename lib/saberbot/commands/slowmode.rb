@@ -26,8 +26,3 @@ module SaberBot
     end
   end
 end
-
-# Slowmode management commands. Slowmode allows only a certain number of messages in a channel per second.
-# This is useful for extremely active or heated chats and keeps conversation at a reasonable pace.
-# !slowmode - puts the current channel in slowmode
-# !slowoff - disables slowmode on the current channel

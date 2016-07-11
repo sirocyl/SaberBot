@@ -7,7 +7,6 @@
 
 module SaberBot
   module Event
-    # Log server joins
     module LogBan
       extend Discordrb::EventContainer
       user_ban do |event|

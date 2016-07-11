@@ -7,7 +7,6 @@
 
 module SaberBot
   module Event
-    # Log server exit
     module LogExit
       extend Discordrb::EventContainer
       member_leave do |event|

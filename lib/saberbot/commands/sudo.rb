@@ -22,6 +22,3 @@ module SaberBot
     end
   end
 end
-
-# !sudo - Elevates staff permission level
-# !unsudo - Returns staff to normal permission level

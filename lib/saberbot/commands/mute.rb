@@ -20,8 +20,3 @@ module SaberBot
     end
   end
 end
-
-# User mute management. Muted users cannot send text messages, upload files, or speak in voice channels.
-# They may read messages and message history, and may join a voice channel for listening.
-# !mute - mutes the specified user
-# !unmute - unmutes the specified user

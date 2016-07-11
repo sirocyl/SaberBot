@@ -24,8 +24,3 @@ module SaberBot
     end
   end
 end
-
-## Channel lockdown management. Lockdown disables send permissions for all regular users.
-## This is particularly useful when staff requires the attention of a channel.
-# !lockdown - places a channel into lockdown mode
-# !unlockdown - disables lockdown mode on the current channel

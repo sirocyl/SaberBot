@@ -27,5 +27,3 @@ module SaberBot
     end
   end
 end
-
-# This file exists because 3dshackers are cancer

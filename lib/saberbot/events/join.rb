@@ -7,14 +7,12 @@
 
 module SaberBot
   module Event
-    # Log server joins
     module LogJoin
       extend Discordrb::EventContainer
       member_join do |event|
         Server_channels[event.server][Config["log_channel"]].send("Joined: #{event.user.display_name} || #{event.user.mention} \nAccount creation date: #{event.user.creation_time.getutc.asctime} UTC")
       end
     end
-    # Autoprobate
     module AutoProbate
       extend Discordrb::EventContainer
       member_join do |event|

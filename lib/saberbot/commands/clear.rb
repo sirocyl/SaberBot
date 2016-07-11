@@ -19,6 +19,3 @@ module SaberBot
     end
   end
 end
-
-# !clear - Prunes specified amount of messages from channel
-#          Valid range 2 - 100

@@ -24,9 +24,3 @@ module SaberBot
     end
   end
 end
-
-# Probation management commands. Probation mode restricts a user to a "probation" or "newcomers" channel
-# !probation - add a user to the probation group
-# !unprobation - remove a user from the probation group
-# !autoprobate - admin only. Toggles whether all new users to the server are added to the probation role automatically.
-# This is useful for preventing brigading, as it forces new users to be manually admitted by a staff member.

@@ -20,9 +20,3 @@ module SaberBot
     end
   end
 end
-
-# Control whether a user has file upload & link preview permissions
-# This is particularly useful for spammy users
-#
-# !noembed - removes a user's media privileges
-# !embed - restore media privileges

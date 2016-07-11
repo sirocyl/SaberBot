@@ -15,5 +15,3 @@ module SaberBot
     end
   end
 end
-
-# !logs - Posts a link to the server chat logs

@@ -6,11 +6,11 @@
 # This file is licensed under the MIT License
 
 module SaberBot
-  BotObject = Discordrb::Commands::CommandBot.new(                                     # CommandBot provides an easy way to create command triggers
-                                            token:          Config["auth_token"],      # Discord API token for bot accounts
-                                            application_id: Config["app_id"],          # Application ID for OAuth2
-                                            prefix:         Config["command_prefix"],  # Command prefix for CommandBot's use
-                                            advanced_functionality: false)             # Disable command chaining
+  BotObject = Discordrb::Commands::CommandBot.new(
+                                            token:          Config["auth_token"],
+                                            application_id: Config["app_id"],
+                                            prefix:         Config["command_prefix"],
+                                            advanced_functionality: false)
 
   # Admin commands
   BotObject.include! Command::Exit

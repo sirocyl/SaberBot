@@ -15,5 +15,3 @@ module SaberBot
     end
   end
 end
-
-# !quit - Admin only command. Writes staff roles to staff.yml and shuts down.
