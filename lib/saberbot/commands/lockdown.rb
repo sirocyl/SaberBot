@@ -12,13 +12,13 @@ module SaberBot
       command(:lockdown, description: "Disable channel send permissions to normal users. Staff only.", permission_level: 1) do |event|
         lockdown = Discordrb::Permissions.new
         lockdown.can_send_messages = true
-        event.channel.define_overwrite(server_roles[event.server][Config["everyone_role"]], 0, lockdown)
+        event.channel.define_overwrite(Server_roles[event.server][Config["everyone_role"]], 0, lockdown)
         "This channel is now in lockdown. Only staff can send messages."
       end
       command(:unlockdown, description: "Enable channel send permissions to normal users. Staff only.", permission_level: 1) do |event|
         lockdown = Discordrb::Permissions.new
         lockdown.can_send_messages = false
-        event.channel.define_overwrite(server_roles[event.server][Config["everyone_role"]], lockdown, 0)
+        event.channel.define_overwrite(Server_roles[event.server][Config["everyone_role"]], lockdown, 0)
         "This channel is no longer in lockdown."
       end
     end
