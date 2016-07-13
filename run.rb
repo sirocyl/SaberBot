@@ -1,4 +1,4 @@
-#/usr/bin/env ruby
+#!/usr/bin/env ruby
 # encoding: utf-8
 
 # SaberBot by Alex Taber and Megumi Sonoda
