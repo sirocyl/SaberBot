@@ -31,9 +31,24 @@ module SaberBot
     end
     module SetGameString
       extend Discordrb::EventContainer
-      ready do |event|
+      ready do
         BotObject.game = Config["game_string"]
       end
     end
+    
+    module StartBanLoop
+      extend Discordrb::EventContainer
+      ready do
+        SaberBot::Loop.ban
+      end
+    end
+    
+    module SlowmodeLoop
+      extend Discordrb::EventContainer
+      ready do
+        SaberBot::Loop.slowmode
+      end
+    end
+    
   end
 end

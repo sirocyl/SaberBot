@@ -24,6 +24,7 @@ module SaberBot
   BotObject.include! Command::Probation
   BotObject.include! Command::Slowmode
   BotObject.include! Command::Sudo
+  BotObject.include! Command::Ban
   # 3dshacks commands
   BotObject.include! Command::RedditCommands
   BotObject.include! Command::Memes
@@ -35,14 +36,12 @@ module SaberBot
   BotObject.include! Event::SlowmodeCounter
   BotObject.include! Event::PopulateHashes
   BotObject.include! Event::SetGameString
-  BotObject.include! Event::LogBan
+  BotObject.include! Event::BanCheckHeartbeat
+  BotObject.include! Event::SlowmodeLoop
 
   # Catch Ctrl-C and kill
   trap("SIGINT") {SaberBot::botexit}
   trap("SIGTERM") {SaberBot::botexit}
-
-  # Run slowmode loop
-  SaberBot.slowmodeloop
 
   BotObject.run
 end

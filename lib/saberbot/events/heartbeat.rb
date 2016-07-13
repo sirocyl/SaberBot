@@ -6,14 +6,12 @@
 # This file is licensed under the MIT License
 
 module SaberBot
-  def SaberBot.slowmodeloop
-    Thread.new {
-      loop do
-        sleep(1)
-        Slowmode_counters.each do |channel, counter|
-          Slowmode_counters[channel] = 0
-        end
+  module Event
+    module BanCheckHeartbeat
+      extend Discordrb::EventContainer
+      heartbeat do
+        SaberBot.bancheck
       end
-    }
+    end
   end
 end

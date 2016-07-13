@@ -13,6 +13,7 @@ require 'yaml'
 require_relative 'saberbot/config'
 Config = SaberBot::SaberConfig.read_config
 Roles  = SaberBot::SaberConfig.read_staff
+Bans   = SaberBot::SaberConfig.read_bans
 
 # Define hashes for later
 require_relative 'saberbot/hashes'
@@ -24,8 +25,11 @@ require_relative 'saberbot/botexit'
 require_relative 'saberbot/commands'
 require_relative 'saberbot/events'
 
-# Slowmode loop
-require_relative 'saberbot/slowmodeloop'
+# Require loops
+require_relative 'saberbot/loops'
+
+# Ban stuff
+require_relative 'saberbot/bancheck'
 
 # Main logic
 require_relative 'saberbot/main'

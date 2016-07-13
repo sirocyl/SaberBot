@@ -8,6 +8,7 @@
 module SaberBot
   def SaberBot.botexit
     SaberBot::SaberConfig::write_staff
+    SaberBot::SaberConfig::write_bans
     BotObject.stop
     exit
   end

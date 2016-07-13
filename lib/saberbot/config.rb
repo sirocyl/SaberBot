@@ -13,6 +13,12 @@ module SaberBot
     def SaberConfig.read_staff
       return YAML.load_file("#{Dir.pwd}/data/staff.yml")
     end
+    def SaberConfig.read_bans
+      return YAML.load_file("#{Dir.pwd}/data/bans.yml")
+    end
+    def SaberConfig.write_bans
+      File.open("#{Dir.pwd}/data/bans.yml", "w") { |f| f.write Bans.to_yaml }
+    end
     def SaberConfig.write_staff
       File.open("#{Dir.pwd}/data/staff.yml", 'w') { |f| f.write Roles.to_yaml }
     end
