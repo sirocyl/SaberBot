@@ -11,8 +11,8 @@ halfop_role: "HalfOP"
 op_role: "OP"
 sop_role: "SuperOP"
 admin_role: "Owner"
-log_channel: <action logging channel>
-banlog_channel: <ban channel>
+log_channel: <server join/exit/etc logging channel>
+modlog_channel: <staff action logging channel>
 log_url: <logs url>
 ignored_channels:
  - mods

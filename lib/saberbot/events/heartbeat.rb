@@ -7,11 +7,13 @@
 
 module SaberBot
   module Event
+
     module BanCheckHeartbeat
       extend Discordrb::EventContainer
       heartbeat do
         SaberBot.bancheck
       end
     end
+    
   end
 end

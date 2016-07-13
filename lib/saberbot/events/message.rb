@@ -7,6 +7,7 @@
 
 module SaberBot
   module Event
+
     module SlowmodeCounter
       extend Discordrb::EventContainer
       message do |event|
@@ -18,5 +19,6 @@ module SaberBot
         end
       end
     end
+    
   end
 end

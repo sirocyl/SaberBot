@@ -7,11 +7,13 @@
 
 module SaberBot
   module Event
+
     module LogExit
       extend Discordrb::EventContainer
       member_leave do |event|
         Server_channels[event.server][Config["log_channel"]].send("Left: #{event.user.mention}")
       end
     end
+    
   end
 end

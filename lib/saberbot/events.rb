@@ -8,7 +8,7 @@
 module SaberBot
   module Event
     Dir["#{__dir__}/events/*.rb"].each {
-      |command| require command
+      |event| require event
     }
   end
 end

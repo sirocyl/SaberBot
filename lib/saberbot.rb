@@ -8,8 +8,10 @@
 require 'discordrb'
 require 'thread'
 require 'yaml'
+require 'date'
+require 'chronic_duration'
 
-# Bot configuration and saved staff roles for sudo
+# Bot configuration and saved staff roles for sudo, also saved bans
 require_relative 'saberbot/config'
 Config = SaberBot::SaberConfig.read_config
 Roles  = SaberBot::SaberConfig.read_staff

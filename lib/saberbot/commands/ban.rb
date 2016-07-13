@@ -5,14 +5,12 @@
 # Copyright 2016 Alex Taber, Megumi Sonoda
 # This file is licensed under the MIT License
 
-require 'date'
-require 'chronic_duration'
-
 module SaberBot
   module Command
     module Ban
       extend Discordrb::Commands::CommandContainer
-      command(:ban, description: "Ban a user. Staff only.\nUsage: `!ban <user> <time in hours> <reason>`") do |event|
+
+      command(:ban, description: "Ban a user. Staff only.\nUsage: `!ban <user> <time, ex: 30d.1w.9h.50s> <reason>`") do |event|
         if event.message.author.permission?(:ban_members)
           args = event.message.content.split(" ")
           member = event.message.mentions[0]
@@ -22,13 +20,14 @@ module SaberBot
           details = {sid: event.server.id, mention: member.mention, staff: event.message.author.mention, time: time, start_time: Time.now.utc, stop_time: Time.now.to_i + time, reason: reason}
           member.pm("**You have been banned from #{event.server.name}!**\n**Expiry:** #{ChronicDuration.output(details[:time], :format => :short)} (#{DateTime.strptime(details[:stop_time].to_s, '%s')})\n**Responsible staff member:** #{event.author.mention}\n\n**Reason:** #{reason}")
           event.server.ban(member)
-          Server_channels[event.server][Config["banlog_channel"]].send("**Banned:** #{details[:mention]}\n**Time:** #{ChronicDuration.output(details[:time], :format => :short)}\n**Reason:** #{details[:reason]}\n**Responsible Moderator:** #{details[:staff]}")
+          Server_channels[event.server][Config["modlog_channel"]].send("**Banned:** #{details[:mention]}\n**Time:** #{ChronicDuration.output(details[:time], :format => :short)}\n**Reason:** #{details[:reason]}\n**Responsible Moderator:** #{details[:staff]}")
           Bans[member.id] = details
           nil
         else
           "You don't have permission to execute command `ban`!"
         end
-      end 
+      end
+      
     end
   end
 end
