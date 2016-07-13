@@ -30,6 +30,7 @@ require_relative 'saberbot/loops'
 
 # Ban stuff
 require_relative 'saberbot/bancheck'
+require_relative 'saberbot/timeparse'
 
 # Main logic
 require_relative 'saberbot/main'
