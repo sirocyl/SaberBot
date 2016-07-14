@@ -21,7 +21,7 @@ module SaberBot
         end
       end
 
-      command(:embed, description: "Restore a user's media privileges. Staff only.", permission_level: 1) do |event|
+      command(:embed, description: "Restore a user's media privileges. Staff only.", permission_level: 1, min_args: 1) do |event|
         break if event.channel.private?
         if event.message.mentions[0]
           event.server.member(event.message.mentions[0].id).remove_role(Server_roles[event.server][Config["noembed_role"]])

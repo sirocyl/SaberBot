@@ -10,7 +10,7 @@ module SaberBot
     module Staff
       extend Discordrb::Commands::CommandContainer
 
-      command(:addstaff, description: "Add a new staff member or modify a staff member's role. Admins only.", permission_level: 2) do |event, user, role_name|
+      command(:addstaff, description: "Add a new staff member or modify a staff member's role. Admins only.", permission_level: 2, min_args: 2) do |event, user, role_name|
         break if event.channel.private?
         if event.message.mentions[0]
           if Server_roles[event.server][role_name]
@@ -27,7 +27,7 @@ module SaberBot
         end
       end
 
-      command(:delstaff, description: "Remove a staff member. Admins only.", permission_level: 2) do |event|
+      command(:delstaff, description: "Remove a staff member. Admins only.", permission_level: 2, min_args: 1) do |event|
         break if event.channel.private?
         if event.message.mentions[0]
           member = event.server.member(event.message.mentions[0])

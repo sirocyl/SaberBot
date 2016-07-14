@@ -29,7 +29,7 @@ module SaberBot
         Server_channels[event.server][Config["modlog_channel"]].send("**Slowmode Disabled:** #{event.channel.mention}\n**Responsible Moderator:** #{event.message.author.mention}")
         "Slowmode disabled."
       end
-      
+
     end
   end
 end

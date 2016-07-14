@@ -10,7 +10,7 @@ module SaberBot
     module Probation
       extend Discordrb::Commands::CommandContainer
 
-      command(:probate, description: "Add a user to probation. Staff only.", permission_level: 1) do |event|
+      command(:probate, description: "Add a user to probation. Staff only.", permission_level: 1, min_args: 1) do |event|
         break if event.channel.private?
         if event.message.mentions[0]
           event.server.member(event.message.mentions[0].id).add_role(Server_roles[event.server][Config["probation_role"]])
@@ -21,7 +21,7 @@ module SaberBot
         end
       end
 
-      command(:unprobate, description: "Remove a user from probation. Staff only", permission_level: 1) do |event|
+      command(:unprobate, description: "Remove a user from probation. Staff only", permission_level: 1, min_args: 1) do |event|
         break if event.channel.private?
         if event.message.mentions[0]
           event.server.member(event.message.mentions[0].id).remove_role(Server_roles[event.server][Config["probation_role"]])
