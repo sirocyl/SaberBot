@@ -11,14 +11,13 @@ module SaberBot
       extend Discordrb::Commands::CommandContainer
 
       command(:clear, description: "Clear x messages. Staff only.", permission_level: 1, min_args: 1) do |event, amount|
-        break if event.channel.private?
         begin
           event.channel.prune(amount.to_i)
         rescue ArgumentError
           "Invalid amount \"#{amount}\". Expected a number between 2 and 100."
         end
       end
-
+      
     end
   end
 end

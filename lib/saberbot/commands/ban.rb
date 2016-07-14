@@ -11,7 +11,6 @@ module SaberBot
       extend Discordrb::Commands::CommandContainer
 
       command(:ban, description: "Ban a user. Staff only.\nUsage: `!ban <user> <time, ex: 30d.1w.9h.50s> <reason>`") do |event|
-        break if event.channel.private?
         if event.message.author.permission?(:ban_members)
           args = event.message.content.split(" ")
           member = event.message.mentions[0]
@@ -28,7 +27,7 @@ module SaberBot
           "You don't have permission to execute command `ban`!"
         end
       end
-
+      
     end
   end
 end
