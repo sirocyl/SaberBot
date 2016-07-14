@@ -7,7 +7,7 @@
 
 module SaberBot
   module Event
-    
+
     module LogJoin
       extend Discordrb::EventContainer
       member_join do |event|
@@ -19,7 +19,7 @@ module SaberBot
       extend Discordrb::EventContainer
       member_join do |event|
         if Config["autoprobate"] then
-          event.server.member(event.user.id).add_role(server_roles[event.server][Config["probation_role"]])
+          event.server.member(event.user.id).add_role(Server_roles[event.server][Config["probation_role"]])
         end
       end
     end
