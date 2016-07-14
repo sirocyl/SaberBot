@@ -8,13 +8,25 @@
 module SaberBot
   module SaberConfig
     def SaberConfig.read_config
-      return YAML.load_file("#{Dir.pwd}/data/config.yml")
+      if File.size?("#{Dir.pwd}/data/config.yml")
+        return YAML.load_file("#{Dir.pwd}/data/config.yml")
+      else
+        puts "Config file missing or empty! Please configure it!"
+        exit
+      end
+      return Hash.new
     end
     def SaberConfig.read_staff
-      return YAML.load_file("#{Dir.pwd}/data/staff.yml")
+      if File.size?("#{Dir.pwd}/data/staff.yml")
+        return YAML.load_file("#{Dir.pwd}/data/staff.yml")
+      end
+      return Hash.new
     end
     def SaberConfig.read_bans
-      return YAML.load_file("#{Dir.pwd}/data/bans.yml")
+      if File.size?("#{Dir.pwd}/data/bans.yml")
+        return YAML.load_file("#{Dir.pwd}/data/bans.yml")
+      end
+      return Hash.new
     end
     def SaberConfig.write_bans
       File.open("#{Dir.pwd}/data/bans.yml", "w") { |f| f.write Bans.to_yaml }
