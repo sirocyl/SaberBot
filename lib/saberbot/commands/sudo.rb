@@ -11,12 +11,14 @@ module SaberBot
       extend Discordrb::Commands::CommandContainer
 
       command(:sudo, description: "Elevate permissions. Staff only.", permission_level: 1) do |event|
+        break if event.channel.private?
         role = event.server.role(Roles[event.message.author.id])
         event.message.author.add_role(role)
         "Elevated #{event.message.author.mention} to #{role.name}. Welcome to the twilight zone!"
       end
 
       command(:unsudo, description: "Deelevate permissions. Staff only.", permission_level: 1) do |event|
+        break if event.channel.private?
         role = event.server.role(Roles[event.message.author.id])
         event.message.author.remove_role(role)
         "De-elevated #{event.message.author.mention} from #{role.name}."

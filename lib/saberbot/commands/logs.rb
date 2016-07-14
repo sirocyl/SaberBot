@@ -9,7 +9,8 @@ module SaberBot
   module Command
     module Logs
       extend Discordrb::Commands::CommandContainer
-      command(:logs, description: "Posts the server logs URL") do
+      command(:logs, description: "Posts the server logs URL") do |event|
+        break if event.channel.private?
         "You can check the logs here: #{Config["log_url"]}"
       end
     end
