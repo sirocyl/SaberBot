@@ -25,6 +25,7 @@ module SaberBot
   BotObject.include! Command::Slowmode
   BotObject.include! Command::Sudo
   BotObject.include! Command::Ban
+  BotObject.include! Command::Kick
   # 3dshacks commands
   BotObject.include! Command::RedditCommands
   BotObject.include! Command::Memes
