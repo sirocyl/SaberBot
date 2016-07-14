@@ -11,7 +11,7 @@ module SaberBot
     module LogJoin
       extend Discordrb::EventContainer
       member_join do |event|
-        Server_channels[event.server][Config["log_channel"]].send("Joined: #{event.user.display_name} || #{event.user.mention} \nAccount creation date: #{event.user.creation_time.getutc.asctime} UTC")
+        Server_channels[event.server][Config["log_channel"]].send("Joined: #{event.user.mention} || #{event.user.distinct}\nAccount creation date: #{event.user.creation_time.getutc.asctime} UTC")
       end
     end
 

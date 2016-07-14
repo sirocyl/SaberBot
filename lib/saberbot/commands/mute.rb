@@ -14,7 +14,7 @@ module SaberBot
         break if event.channel.private?
         if event.message.mentions[0]
           event.server.member(event.message.mentions[0].id).add_role(Server_roles[event.server][Config["mute_role"]])
-          Server_channels[event.server][Config["modlog_channel"]].send("**Muted:** #{event.message.mentions[0].mention}\n**Responsible Moderator:** #{event.message.author.mention}")
+          Server_channels[event.server][Config["modlog_channel"]].send("**Muted:** #{event.message.mentions[0].mention} || #{event.message.mentions[0].distinct}\n**Responsible Moderator:** #{event.message.author.mention}")
           "Muted #{event.message.mentions[0].mention}."
         else
           "Invalid argument. Please mention a valid user."
@@ -25,7 +25,7 @@ module SaberBot
         break if event.channel.private?
         if event.message.mentions[0]
           event.server.member(event.message.mentions[0].id).remove_role(Server_roles[event.server][Config["mute_role"]])
-          Server_channels[event.server][Config["modlog_channel"]].send("**Unmuted:** #{event.message.mentions[0].mention}\n**Responsible Moderator:** #{event.message.author.mention}")
+          Server_channels[event.server][Config["modlog_channel"]].send("**Unmuted:** #{event.message.mentions[0].mention} || #{event.message.mentions[0].distinct}\n**Responsible Moderator:** #{event.message.author.mention}")
           "Unmuted #{event.message.mentions[0].mention}."
         else
           "Invalid argument. Please mention a valid user."

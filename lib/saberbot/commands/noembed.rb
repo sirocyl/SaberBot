@@ -14,7 +14,7 @@ module SaberBot
         break if event.channel.private?
         if event.message.mentions[0]
           event.server.member(event.message.mentions[0].id).add_role(Server_roles[event.server][Config["noembed_role"]])
-          Server_channels[event.server][Config["modlog_channel"]].send("**No-Embed:** #{event.message.mentions[0].mention}\n**Responsible Moderator:** #{event.message.author.mention}")
+          Server_channels[event.server][Config["modlog_channel"]].send("**No-Embed:** #{event.message.mentions[0].mention} || #{event.message.mentions[0].distinct}\n**Responsible Moderator:** #{event.message.author.mention}")
           "Removed #{event.message.mentions[0].mention}'s media privileges."
         else
           "Invalid argument. Please mention a valid user."
@@ -25,7 +25,7 @@ module SaberBot
         break if event.channel.private?
         if event.message.mentions[0]
           event.server.member(event.message.mentions[0].id).remove_role(Server_roles[event.server][Config["noembed_role"]])
-          Server_channels[event.server][Config["modlog_channel"]].send("**Embed:** #{event.message.mentions[0].mention}\n**Responsible Moderator:** #{event.message.author.mention}")
+          Server_channels[event.server][Config["modlog_channel"]].send("**Embed:** #{event.message.mentions[0].mention} || #{event.message.mentions[0].distinct}\n**Responsible Moderator:** #{event.message.author.mention}")
           "Restored #{event.message.mentions[0].mention}'s media privileges."
         else
           "Invalid argument. Please mention a valid user."
