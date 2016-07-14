@@ -11,6 +11,7 @@ module SaberBot
       extend Discordrb::Commands::CommandContainer
 
       command(:lockdown, description: "Disable channel send permissions to normal users. Staff only.", permission_level: 1) do |event|
+        break if event.channel.private?
         lockdown = Discordrb::Permissions.new
         lockdown.can_send_messages = true
         event.channel.define_overwrite(Server_roles[event.server][Config["everyone_role"]], 0, lockdown)
@@ -19,13 +20,14 @@ module SaberBot
       end
 
       command(:unlockdown, description: "Enable channel send permissions to normal users. Staff only.", permission_level: 1) do |event|
+        break if event.channel.private?
         lockdown = Discordrb::Permissions.new
         lockdown.can_send_messages = false
         event.channel.define_overwrite(Server_roles[event.server][Config["everyone_role"]], lockdown, 0)
         Server_channels[event.server][Config["modlog_channel"]].send("**Lockdown Lifted:** #{event.channel.mention}\n**Responsible Moderator:** #{event.message.author.mention}")
         "This channel is no longer in lockdown."
       end
-      
+
     end
   end
 end

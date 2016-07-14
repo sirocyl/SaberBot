@@ -11,6 +11,7 @@ module SaberBot
       extend Discordrb::Commands::CommandContainer
 
       command(:slowmode, description: "Set channel into slowmode. Arguments: number of messages per second. Staff only.", permission_level: 1, min_args: 1) do |event, msgs|
+        break if event.channel.private?
         if msgs.to_i < 1 then
           "Invalid amount \"#{msgs}\". Please choose a number of at least 1."
         else
@@ -22,12 +23,13 @@ module SaberBot
       end
 
       command(:slowoff, description: "Disable slowmode on a channel. Staff only.", permission_level: 1) do |event|
+        break if event.channel.private?
         Slowmode_maxmsgs.delete(event.channel)
         Slowmode_counters.delete(event.channel)
         Server_channels[event.server][Config["modlog_channel"]].send("**Slowmode Disabled:** #{event.chanenl.mention}\n**Responsible Moderator:** #{event.message.author.mention}")
         "Slowmode disabled."
       end
-      
+
     end
   end
 end

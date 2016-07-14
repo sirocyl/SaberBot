@@ -10,6 +10,7 @@ module SaberBot
     module Exit
       extend Discordrb::Commands::CommandContainer
       command(:quit, description: "Disconnect the bot from the server. Admins only.", permission_level: 2) do
+        break if event.channel.private?
         SaberBot::botexit
       end
     end
