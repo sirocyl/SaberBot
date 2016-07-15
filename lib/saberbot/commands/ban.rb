@@ -18,7 +18,7 @@ module SaberBot
             member = event.message.mentions[0]
             time = SaberBot.parse_time(args[2])
             unless time
-              event.channel.send("Invalid argument. Pleace specify a valid time format.")
+              event.channel.send("Invalid argument. Please specify a valid time format.")
               break
             end
             reason = args[3..-1].join(" ")
