@@ -31,7 +31,7 @@ module SaberBot
         break if event.channel.private?
         if event.message.mentions[0]
           member = event.server.member(event.message.mentions[0])
-          member.remove_role(event.server.role(Roles[event.message.author.id]))
+          member.remove_role(event.server.role(Roles[member.id]))
           member.remove_role(Server_roles[event.server][Config["staff_role"]])
           Roles.delete(member.id)
           "Member #{member.mention} has been removed from staff. See you!"

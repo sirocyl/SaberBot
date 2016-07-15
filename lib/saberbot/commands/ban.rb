@@ -10,13 +10,17 @@ module SaberBot
     module Ban
       extend Discordrb::Commands::CommandContainer
 
-      command(:ban, description: "Ban a user. Staff only.\nUsage: `!ban <user> <time, ex: 30d.1w.9h.50s> <reason>`", min_args: 1) do |event|
+      command(:ban, description: "Ban a user. Staff only.\nUsage: `!ban <user> <time, ex: 30d.1w.9h.50s> <reason>`", min_args: 2) do |event|
         break if event.channel.private?
         if event.message.author.permission?(:ban_members)
           if event.message.mentions[0]
             args = event.message.content.split(" ")
             member = event.message.mentions[0]
             time = SaberBot.parse_time(args[2])
+            unless time
+              event.channel.send("Invalid argument. Pleace specify a valid time format.")
+              break
+            end
             reason = args[3..-1].join(" ")
             reason += "." unless reason.end_with?('.')
             details = {sid: event.server.id, mention: member.mention, distinct: member.distinct, staff: event.message.author.mention, time: time, start_time: Time.now.utc, stop_time: Time.now.to_i + time, reason: reason}
