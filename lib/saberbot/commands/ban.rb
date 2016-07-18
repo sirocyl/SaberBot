@@ -41,6 +41,26 @@ module SaberBot
         end
       end
 
+      command(:unban, description: "Unban a user. Staff only.\nUsage: `!unban <user#0000>`", min_args: 1) do |event|
+        break if event.channel.private?
+        if event.message.author.permission?(:ban_members)
+          args = event.message.content.split(" ")
+          target = args[1]
+          Bans.each do |uid, details|
+            if target.eql?(details[:distinct])
+              server = BotObject.servers[details[:sid]]
+              user = server.bans.find {|user| user.id == uid}
+              server.unban(user)
+              Server_channels[server][Config["modlog_channel"]].send("**Unbanned:** #{details[:mention]} || #{details[:distinct]}\n**Responsible Moderator:** #{event.message.author.mention}")
+              Bans.delete(uid)
+            end
+          end
+        nil
+        else
+          "You don't have permission to execute command `unban`!"
+        end
+      end
+
     end
   end
 end
