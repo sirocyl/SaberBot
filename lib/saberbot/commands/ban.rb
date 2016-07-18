@@ -15,8 +15,12 @@ module SaberBot
         if event.message.author.permission?(:ban_members)
           if event.message.mentions[0]
             args = event.message.content.split(" ")
-            member = event.message.mentions[0]
+            member = event.server.member(event.message.mentions[0].id)
             time = SaberBot.parse_time(args[2])
+            if member.role?(Server_roles[event.server][Config['staff_role']])
+              event.channel.send("Error: You cannot ban a fellow staff member!")
+              break
+            end
             unless time
               event.channel.send("Invalid argument. Please specify a valid time format.")
               break

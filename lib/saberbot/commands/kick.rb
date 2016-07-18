@@ -15,10 +15,14 @@ module SaberBot
         if event.message.author.permission?(:kick_members)
           if event.message.mentions[0]
             args = event.message.content.split(" ")
-            member = event.message.mentions[0]
+            member = event.server.member(event.message.mentions[0].id)
             reason = args[2..-1].join(" ")
             reason += "." unless reason.end_with?('.')
             details = {sid: event.server.id, mention: member.mention, distinct: member.distinct, staff: event.message.author.mention, reason: reason}
+            if member.role?(Server_roles[event.server][Config['staff_role']])
+              event.channel.send("Error: You cannot kick a fellow staff member!")
+              break
+            end
             member.pm("**You have been kicked from #{event.server.name}!**\n**Responsible staff member:** #{event.message.author.mention}\n\n**Reason:** #{reason}")
             event.server.kick(member)
             Server_channels[event.server][Config["modlog_channel"]].send("**Kicked:** #{details[:mention]} || #{details[:distinct]}\n**Reason:** #{details[:reason]}\n**Responsible Moderator:** #{details[:staff]}")
