@@ -13,9 +13,11 @@ require 'chronic_duration'
 
 # Bot configuration and saved staff roles for sudo, also saved bans
 require_relative 'saberbot/config'
-Config = SaberBot::SaberConfig.read_config
-Roles  = SaberBot::SaberConfig.read_staff
-Bans   = SaberBot::SaberConfig.read_bans
+Config   = SaberBot::SaberConfig.read_config
+Roles    = SaberBot::SaberConfig.read_staff
+Bans     = SaberBot::SaberConfig.read_bans
+Mutes    = SaberBot::SaberConfig.read_mutes
+NoEmbeds = SaberBot::SaberConfig.read_noembeds
 
 # Define hashes for later
 require_relative 'saberbot/hashes'

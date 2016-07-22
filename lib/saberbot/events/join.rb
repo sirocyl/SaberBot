@@ -24,5 +24,18 @@ module SaberBot
       end
     end
 
+    module AutoPunish
+      extend Discordrb::EventContainer
+      member_join do |event|
+        member = event.server.member(event.user.id)
+        if Mutes[member.id] then
+          member.add_role(Server_roles[event.server][Config["mute_role"]])
+        end
+        if NoEmbeds[member.id] then
+          member.add_role(Server_roles[event.server][Config["noembed_role"]])
+        end
+      end
+    end
+
   end
 end

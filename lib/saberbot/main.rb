@@ -39,6 +39,7 @@ module SaberBot
   BotObject.include! Event::SetGameString
   BotObject.include! Event::BanCheckHeartbeat
   BotObject.include! Event::SlowmodeLoop
+  BotObject.include! Event::AutoPunish
 
   # Catch Ctrl-C and kill
   trap("SIGINT") {SaberBot::botexit}

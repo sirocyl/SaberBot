@@ -31,6 +31,24 @@ module SaberBot
     def SaberConfig.write_bans
       File.open("#{Dir.pwd}/data/bans.yml", "w") { |f| f.write Bans.to_yaml }
     end
+    def SaberConfig.read_mutes
+      if File.size?("#{Dir.pwd}/data/mutes.yml")
+        return YAML.load_file("#{Dir.pwd}/data/mutes.yml")
+      end
+      return Hash.new
+    end
+    def SaberConfig.write_mutes
+      File.open("#{Dir.pwd}/data/mutes.yml", "w") { |f| f.write Mutes.to_yaml }
+    end
+    def SaberConfig.read_noembeds
+      if File.size?("#{Dir.pwd}/data/noembeds.yml")
+        return YAML.load_file("#{Dir.pwd}/data/noembeds.yml")
+      end
+      return Hash.new
+    end
+    def SaberConfig.write_noembeds
+      File.open("#{Dir.pwd}/data/noembeds.yml", "w") { |f| f.write NoEmbeds.to_yaml }
+    end
     def SaberConfig.write_staff
       File.open("#{Dir.pwd}/data/staff.yml", 'w') { |f| f.write Roles.to_yaml }
     end

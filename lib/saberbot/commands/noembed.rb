@@ -13,9 +13,17 @@ module SaberBot
       command(:noembed, description: "Remove a user's media privileges. Staff only.", permission_level: 1, min_args: 1) do |event|
         break if event.channel.private?
         if event.message.mentions[0]
-          event.server.member(event.message.mentions[0].id).add_role(Server_roles[event.server][Config["noembed_role"]])
-          Server_channels[event.server][Config["modlog_channel"]].send("**No-Embed:** #{event.message.mentions[0].mention} || #{event.message.mentions[0].distinct}\n**Responsible Moderator:** #{event.message.author.mention}")
-          "Removed #{event.message.mentions[0].mention}'s media privileges."
+          member = event.server.member(event.message.mentions[0].id)
+          if member.role?(Server_roles[event.server][Config['staff_role']])
+            event.channel.send("Error: You cannot remove a fellow staff member's media privileges!")
+            break
+          end
+          details = {sid: event.server.id, mention: member.mention, distinct: member.distinct, staff: event.message.author.mention}
+          member.add_role(Server_roles[event.server][Config["noembed_role"]])
+          event.channel.send("Removed #{details[:mention]}'s media privileges.")
+          Server_channels[event.server][Config["modlog_channel"]].send("**No-Embed:** #{details[:mention]} || #{details[:distinct]}\n**Responsible Moderator:** #{details[:staff]}")
+          NoEmbeds[member.id] = details
+          nil
         else
           "Invalid argument. Please mention a valid user."
         end
@@ -24,9 +32,12 @@ module SaberBot
       command(:embed, description: "Restore a user's media privileges. Staff only.", permission_level: 1, min_args: 1) do |event|
         break if event.channel.private?
         if event.message.mentions[0]
-          event.server.member(event.message.mentions[0].id).remove_role(Server_roles[event.server][Config["noembed_role"]])
-          Server_channels[event.server][Config["modlog_channel"]].send("**Embed:** #{event.message.mentions[0].mention} || #{event.message.mentions[0].distinct}\n**Responsible Moderator:** #{event.message.author.mention}")
-          "Restored #{event.message.mentions[0].mention}'s media privileges."
+          member = event.server.member(event.message.mentions[0].id)
+          event.channel.send("Restored #{member.mention}'s media privileges.")
+          member.remove_role(Server_roles[event.server][Config["noembed_role"]])
+          Server_channels[event.server][Config["modlog_channel"]].send("**Embed:** #{member.mention} || #{member.distinct}\n**Responsible Moderator:** #{event.message.author.mention}")
+          NoEmbeds.delete(member.id)
+          nil
         else
           "Invalid argument. Please mention a valid user."
         end
