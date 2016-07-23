@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 # encoding: utf-8
 
 # SaberBot by Alex Taber and Megumi Sonoda
@@ -18,7 +17,7 @@ module SaberBot
           "Invalid amount \"#{amount}\". Expected a number between 2 and 100."
         end
       end
-      
+
     end
   end
 end

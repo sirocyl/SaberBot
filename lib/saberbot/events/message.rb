@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 # encoding: utf-8
 
 # SaberBot by Alex Taber and Megumi Sonoda
@@ -19,6 +18,6 @@ module SaberBot
         end
       end
     end
-    
+
   end
 end

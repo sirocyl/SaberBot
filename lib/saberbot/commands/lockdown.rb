@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 # encoding: utf-8
 
 # SaberBot by Alex Taber and Megumi Sonoda
@@ -27,7 +26,7 @@ module SaberBot
         Server_channels[event.server][Config["modlog_channel"]].send("**Lockdown Lifted:** #{event.channel.mention}\n**Responsible Moderator:** #{event.message.author.mention}")
         "This channel is no longer in lockdown."
       end
-      
+
     end
   end
 end
