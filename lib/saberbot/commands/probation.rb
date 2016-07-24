@@ -4,38 +4,50 @@
 
 module SaberBot
   module Command
+    # lock a user into a channel for newcomers/punished users. or remove them.
     module Probation
       extend Discordrb::Commands::CommandContainer
-
-      command(:probate, description: "Add a user to probation. Staff only.", permission_level: 1, min_args: 1) do |event|
+      command(:probate, description: 'Add a user to probation. Staff only.', permission_level: 1, min_args: 1) do |event|
         break if event.channel.private?
         if event.message.mentions[0]
-          event.server.member(event.message.mentions[0].id).add_role(Server_roles[event.server][Config["probation_role"]])
-          Server_channels[event.server][Config["modlog_channel"]].send("**Probation Placed:** #{event.message.mentions[0].mention} || #{event.message.mentions[0].distinct}\n**Responsible Moderator:** #{event.message.author.mention}")
-          "Added #{event.message.mentions[0].mention} to probation."
+          member = event.server.member(event.message.mentions[0].id)
+
+          member.add_role(SaberConfig.server_roles[event.server][SaberConfig.settings['probation_role']])
+          SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
+            "**Probation Placed:** #{member.mention} || #{member.distinct}\n" \
+            "**Responsible Moderator:** #{event.message.author.mention}"
+          )
+          "Added #{member.mention} to probation."
         else
-          "Invalid argument. Please mention a valid user."
+          'Invalid argument. Please mention a valid user.'
         end
       end
 
-      command(:unprobate, description: "Remove a user from probation. Staff only", permission_level: 1, min_args: 1) do |event|
+      command(:unprobate, description: 'Remove a user from probation. Staff only', permission_level: 1, min_args: 1) do |event|
         break if event.channel.private?
         if event.message.mentions[0]
-          event.server.member(event.message.mentions[0].id).remove_role(Server_roles[event.server][Config["probation_role"]])
-          Server_channels[event.server][Config["modlog_channel"]].send("**Probation Lifted:** #{event.message.mentions[0].mention} || #{event.message.mentions[0].distinct}\n**Responsible Moderator:** #{event.message.author.mention}")
-          "Removed #{event.message.mentions[0].mention} from probation."
+          member = event.server.member(event.message.mentions[0].id)
+
+          member.remove_role(SaberConfig.server_roles[event.server][SaberConfig.settings['probation_role']])
+          SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
+            "**Probation Lifted:** #{member.mention} || #{member.distinct}\n" \
+            "**Responsible Moderator:** #{event.message.author.mention}"
+          )
+          "Removed #{member.mention} from probation."
         else
-          "Invalid argument. Please mention a valid user."
+          'Invalid argument. Please mention a valid user.'
         end
       end
 
-      command(:autoprobate, description: "Toggles whether new users are automatically added to probation. Admins only.", permission_level: 2) do |event|
+      command(:autoprobate, description: 'Toggles whether new users are automatically added to probation. Admins only.', permission_level: 2) do |event|
         break if event.channel.private?
-        Config["autoprobate"] = !Config["autoprobate"]
-        Server_channels[event.server][Config["modlog_channel"]].send("**Auto-Probate:** #{Config["autoprobate"]}\n**Responsible Moderator:** #{event.message.author.mention}")
-        "Autoprobate is now: #{Config["autoprobate"]}"
+        SaberConfig.settings['autoprobate'] = !SaberConfig.settings['autoprobate']
+        SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
+          "**Auto-Probate:** #{Config['autoprobate']}\n" \
+          "**Responsible Moderator:** #{event.message.author.mention}"
+        )
+        "Autoprobate is now: #{SaberConfig.settings['autoprobate']}"
       end
-
     end
   end
 end

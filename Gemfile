@@ -1,3 +1,3 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 gem 'discordrb'
 gem 'chronic_duration'

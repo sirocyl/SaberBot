@@ -4,27 +4,23 @@
 
 module SaberBot
   module Command
+    # Meme commands, for the memers. TODO: Proper custom-command support
     module Memes
       extend Discordrb::Commands::CommandContainer
-      command(:lenny, description: "Memes") do |event|
-        break if event.channel.private?
-        "( ͡° ͜ʖ ͡°)"
+      command(:lenny, description: 'Memes') do |event|
+        '( ͡° ͜ʖ ͡°)' unless event.channel.private?
       end
-      command(:permabrocked, description: "Memes") do |event|
-        break if event.channel.private?
-        "http://i.imgur.com/ARsOh3p.jpg"
+      command(:permabrocked, description: 'Memes') do |event|
+        'http://i.imgur.com/ARsOh3p.jpg' unless event.channel.private?
       end
-      command(:rip, description: "Memes") do |event|
-        break if event.channel.private?
-        "Press F to pay respects."
+      command(:rip, description: 'Memes') do |event|
+        'Press F to pay respects.' unless event.channel.private?
       end
-      command(:s_99, description: "Memes") do |event|
-        break if event.channel.private?
-        "**ALL HAIL BRITANNIA!**"
+      command(:s_99, description: 'Memes') do |event|
+        '**ALL HAIL BRITANNIA!**' unless event.channel.private?
       end
-      command(:xor, description: "Memes") do |event|
-        break if event.channel.private?
-        "http://i.imgur.com/nLKATP6.png"
+      command(:xor, description: 'Memes') do |event|
+        'http://i.imgur.com/nLKATP6.png' unless event.channel.private?
       end
     end
   end

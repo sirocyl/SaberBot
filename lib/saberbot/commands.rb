@@ -3,9 +3,10 @@
 # This file is licensed under the MIT License
 
 module SaberBot
+  # import all our commands!
   module Command
-    Dir["#{__dir__}/commands/*.rb"].each {
-      |command| require command
-    }
+    Dir["#{__dir__}/commands/*.rb"].each do |command|
+      require_relative command
+    end
   end
 end

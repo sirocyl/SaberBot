@@ -4,13 +4,12 @@
 
 module SaberBot
   module Event
-
+    # call bancheck on each heartbeat from the server
     module BanCheckHeartbeat
       extend Discordrb::EventContainer
       heartbeat do
         SaberBot.bancheck
       end
     end
-
   end
 end

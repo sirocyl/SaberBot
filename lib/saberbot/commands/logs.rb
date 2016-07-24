@@ -4,11 +4,12 @@
 
 module SaberBot
   module Command
+    # post a url to our logs! TODO: add logging. oops.
     module Logs
       extend Discordrb::Commands::CommandContainer
-      command(:logs, description: "Posts the server logs URL") do |event|
+      command(:logs, description: 'Posts the server logs URL') do |event|
         break if event.channel.private?
-        "You can check the logs here: #{Config["log_url"]}"
+        "You can check the logs here: #{SaberConfig.settings['log_url']}"
       end
     end
   end

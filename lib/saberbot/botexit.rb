@@ -2,12 +2,13 @@
 # Copyright 2016 Alex Taber, Megumi Sonoda
 # This file is licensed under the MIT License
 
+# Write our yml files and exit gracefully
 module SaberBot
-  def SaberBot.botexit
-    SaberBot::SaberConfig::write_staff
-    SaberBot::SaberConfig::write_bans
-    SaberBot::SaberConfig::write_mutes
-    SaberBot::SaberConfig::write_noembeds
+  def self.botexit
+    SaberConfig.write_staff
+    SaberConfig.write_bans
+    SaberConfig.write_mutes
+    SaberConfig.write_noembeds
     BotObject.stop
     exit
   end

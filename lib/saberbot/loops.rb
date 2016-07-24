@@ -3,16 +3,17 @@
 # This file is licensed under the MIT License
 
 module SaberBot
+  # threaded loops go in here!
   module Loop
-    def Loop.slowmode
-      Thread.new {
+    def self.slowmode
+      Thread.new do
         loop do
           sleep(1)
-          Slowmode_counters.each do |channel, counter|
-            Slowmode_counters[channel] = 0
+          SaberConfig.slowmode_counters.each do |channel|
+            SaberConfig.slowmode_counters[channel] = 0
           end
         end
-      }
+      end
     end
   end
 end

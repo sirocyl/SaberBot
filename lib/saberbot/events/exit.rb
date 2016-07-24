@@ -4,13 +4,14 @@
 
 module SaberBot
   module Event
-
+    # Log when people leave the server
     module LogExit
       extend Discordrb::EventContainer
       member_leave do |event|
-        Server_channels[event.server][Config["log_channel"]].send("Left: #{event.user.mention} || #{event.user.distinct}")
+        SaberConfig.server_channels[event.server][SaberConfig.settings['log_channel']].send(
+          "Left: #{event.user.mention} || #{event.user.distinct}"
+        )
       end
     end
-
   end
 end

@@ -4,41 +4,53 @@
 
 module SaberBot
   module Command
+    # add and remove staff users
     module Staff
       extend Discordrb::Commands::CommandContainer
-
-      command(:addstaff, description: "Add a new staff member or modify a staff member's role. Admins only.", permission_level: 2, min_args: 2) do |event, user, role_name|
+      command(
+        :addstaff,
+        description: 'Add a staff member to a powered role. Admins only.',
+        permission_level: 2,
+        min_args: 2
+      ) do |event, _user, role_name|
         break if event.channel.private?
+
         if event.message.mentions[0]
-          if Server_roles[event.server][role_name]
+          if SaberConfig.server_roles[event.server][role_name]
             member = event.server.member(event.message.mentions[0])
-            role = Server_roles[event.server][role_name]
-            member.add_role(Server_roles[event.server][Config["staff_role"]])
-            Roles[member.id] = role.id
+            role = SaberConfig.server_roles[event.server][role_name]
+
+            member.add_role(SaberConfig.server_roles[event.server][SaberConfig.settings['staff_role']])
+            SaberConfig.roles[member.id] = role.id
             "Member #{member.mention} has been added as a #{role.name}. Welcome aboard!"
           else
-            "Invalid argument. Please specify a valid role."
+            'Invalid argument. Please specify a valid role.'
           end
         else
-          "Invalid argument. Please mention a valid user."
+          'Invalid argument. Please mention a valid user.'
         end
       end
 
-      command(:delstaff, description: "Remove a staff member. Admins only.", permission_level: 2, min_args: 1) do |event|
+      command(
+        :delstaff,
+        description: 'Remove a staff member. Admins only.',
+        permission_level: 2,
+        min_args: 1
+      ) do |event|
         break if event.channel.private?
         if event.message.mentions[0]
           member = event.server.member(event.message.mentions[0])
-          if Roles[member.id]
-            member.remove_role(event.server.role(Roles[member.id]))
-            member.remove_role(Server_roles[event.server][Config["staff_role"]])
-            Roles.delete(member.id)
+
+          if SaberConfig.roles[member.id]
+            member.remove_role(event.server.role(SaberConfig.roles[member.id]))
+            member.remove_role(SaberConfig.server_roles[event.server][SaberConfig.settings['staff_role']])
+            SaberConfig.roles.delete(member.id)
             "Member #{member.mention} has been removed from staff. See you!"
           else
-            "Error: #{member.mention}'s UID isn't saved in the sudo list! You should report this to an admin."
+            "Error: #{member.mention}'s ID isn't saved in the sudo list!"
           end
         end
       end
-
     end
   end
 end

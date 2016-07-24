@@ -4,43 +4,44 @@
 
 module SaberBot
   module Event
-
+    # populate our hashes with info when the bot connects!
     module PopulateHashes
       extend Discordrb::EventContainer
-      ready do |event|
-        BotObject.servers.each do |key, server|
-          Server_roles[server] = Hash.new
-          Server_channels[server] = Hash.new
+      ready do
+        BotObject.servers.each do |_key, server|
+          SaberConfig.server_roles[server] = {}
+          SaberConfig.server_channels[server] = {}
         end
-        BotObject.servers.each do |key, server|
+        BotObject.servers.each do |_key, server|
           server.roles.each do |role|
-            if role.name == Config["staff_role"]
+            if role.name == SaberConfig.settings['staff_role']
               BotObject.set_role_permission(role.id, 1)
-            elsif role.name == Config["admin_role"]
+            elsif role.name == SaberConfig.settings['admin_role']
               BotObject.set_role_permission(role.id, 2)
             end
-            Server_roles[server][role.name] = role
+            SaberConfig.server_roles[server][role.name] = role
           end
           server.channels.each do |channel|
-            Server_channels[server][channel.name] = channel
+            SaberConfig.server_channels[server][channel.name] = channel
           end
         end
       end
     end
 
+    # set our "playing" message when we connect
     module SetGameString
       extend Discordrb::EventContainer
       ready do
-        BotObject.game = Config["game_string"]
+        BotObject.game = SaberConfig.settings['game_string']
       end
     end
 
+    # start the slowmde counter reset-loop!
     module SlowmodeLoop
       extend Discordrb::EventContainer
       ready do
         SaberBot::Loop.slowmode
       end
     end
-
   end
 end

@@ -2,12 +2,14 @@
 # Copyright 2016 Alex Taber, Megumi Sonoda
 # This file is licensed under the MIT License
 
+# Define the bot object and include all our cool stuff
 module SaberBot
   BotObject = Discordrb::Commands::CommandBot.new(
-                                            token:          Config["auth_token"],
-                                            application_id: Config["app_id"],
-                                            prefix:         Config["command_prefix"],
-                                            advanced_functionality: false)
+    token:          SaberConfig.settings['auth_token'],
+    application_id: SaberConfig.settings['app_id'],
+    prefix:         SaberConfig.settings['command_prefix'],
+    advanced_functionality: false
+  )
 
   # Admin commands
   BotObject.include! Command::Exit
@@ -39,8 +41,8 @@ module SaberBot
   BotObject.include! Event::AutoPunish
 
   # Catch Ctrl-C and kill
-  trap("SIGINT") {SaberBot::botexit}
-  trap("SIGTERM") {SaberBot::botexit}
+  trap('SIGINT') { SaberBot.botexit }
+  trap('SIGTERM') { SaberBot.botexit }
 
   BotObject.run
 end

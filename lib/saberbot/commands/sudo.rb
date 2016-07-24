@@ -4,31 +4,40 @@
 
 module SaberBot
   module Command
+    # let staff users be normal users most of the time
     module Sudo
       extend Discordrb::Commands::CommandContainer
-
-      command(:sudo, description: "Elevate permissions. Staff only.", permission_level: 1) do |event|
+      command(
+        :sudo,
+        description: 'Elevate permissions. Staff only.',
+        permission_level: 1
+      ) do |event|
         break if event.channel.private?
-        if Roles[event.message.author.id]
-          role = event.server.role(Roles[event.message.author.id])
+
+        if SaberConfig.roles[event.message.author.id]
+          role = event.server.role(SaberConfig.roles[event.message.author.id])
           event.message.author.add_role(role)
           "Elevated #{event.message.author.mention} to #{role.name}. Welcome to the twilight zone!"
         else
-          "Error: Your UID isn't saved in the sudo list! You should report this to an admin."
+          "Error: Your ID isn't saved in the sudo list!"
         end
       end
 
-      command(:unsudo, description: "Deelevate permissions. Staff only.", permission_level: 1) do |event|
+      command(
+        :unsudo,
+        description: 'De-elevate permissions. Staff only.',
+        permission_level: 1
+      ) do |event|
         break if event.channel.private?
-        if Roles[event.message.author.id]
-          role = event.server.role(Roles[event.message.author.id])
+
+        if SaberConfig.roles[event.message.author.id]
+          role = event.server.role(SaberConfig.roles[event.message.author.id])
           event.message.author.remove_role(role)
           "De-elevated #{event.message.author.mention} from #{role.name}."
         else
-          "Error: Your UID isn't saved in the sudo list! You should report this to an admin."
+          "Error: Your ID isn't saved in the sudo list!"
         end
       end
-
     end
   end
 end
