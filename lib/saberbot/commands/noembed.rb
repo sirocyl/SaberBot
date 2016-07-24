@@ -26,7 +26,7 @@ module SaberBot
 
           member.add_role(SaberConfig.server_roles[event.server][SaberConfig.settings['noembed_role']])
           event.channel.send("Removed #{details[:mention]}'s media privileges.")
-          Server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
+          SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
             "**No-Embed:** #{details[:mention]} || #{details[:distinct]}\n" \
             "**Responsible Moderator:** #{details[:staff]}"
           )
@@ -44,7 +44,7 @@ module SaberBot
 
           member.remove_role(SaberConfig.server_roles[event.server][SaberConfig.settings['noembed_role']])
           event.channel.send("Restored #{member.mention}'s media privileges.")
-          Server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
+          SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
             "**Embed:** #{member.mention} || #{member.distinct}\n" \
             "**Responsible Moderator:** #{event.message.author.mention}"
           )
