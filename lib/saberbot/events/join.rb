@@ -19,7 +19,7 @@ module SaberBot
     module AutoProbate
       extend Discordrb::EventContainer
       member_join do |event|
-        event.server.member(event.user.id).add_role(Server_roles[event.server][SaberConfig.settings['probation_role']]) if SaberConfig.settings['autoprobate']
+        event.server.member(event.user.id).add_role(SaberConfig.server_roles[event.server][SaberConfig.settings['probation_role']]) if SaberConfig.settings['autoprobate']
       end
     end
 
