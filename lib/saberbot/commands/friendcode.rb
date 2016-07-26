@@ -21,12 +21,12 @@ module SaberBot
               :user => "#{event.message.author.mention}",
               :fc => "#{friendcode}"
             )
-          
+
             event.channel.send("Successfully registered friendcode!")
           else
             event.channel.send("Invalid friendcode!")
           end
-          
+
         else
 
           event.channel.send("Please delete your old FC before adding a new one!")
@@ -42,12 +42,13 @@ module SaberBot
         max_args: 1
       ) do |event, user|
 
+        user = user.delete! '!'
 
         if SaberConfig.friendcodes.filter(:user => event.message.author.mention).count == 0
           event.channel.send("You need to register a FC before looking up others!")
           break
         end
-        
+
         if SaberConfig.friendcodes.filter(:user => user).count == 0
           event.channel.send("User does not have a friendcode registered!")
           break
