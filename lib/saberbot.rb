@@ -7,14 +7,23 @@ require 'thread'
 require 'yaml'
 require 'date'
 require 'chronic_duration'
+require 'sequel'
 
 # Bot configuration and saved staff roles for sudo, also saved bans
 require_relative 'saberbot/config'
-SaberConfig.settings = SaberConfig.read_config
-SaberConfig.roles = SaberConfig.read_staff
-SaberConfig.bans = SaberConfig.read_bans
-SaberConfig.mutes = SaberConfig.read_mutes
-SaberConfig.noembeds = SaberConfig.read_noembeds
+
+SaberConfig.settings = SaberConfig.read_yml('config.yml')
+
+if SaberConfig.settings == {}
+  puts 'Config is empty! Please fix.'
+  exit
+end
+
+SaberConfig.roles = SaberConfig.read_yml('staff.yml')
+SaberConfig.bans = SaberConfig.read_yml('bans.yml')
+SaberConfig.mutes = SaberConfig.read_yml('mutes.yml')
+SaberConfig.noembeds = SaberConfig.read_yml('noembeds.yml')
+SaberConfig.friendcodes = SaberConfig.read_database('friendcodes.sql')[:friendcodes]
 
 # Provide method for graceful shutdown
 require_relative 'saberbot/botexit'

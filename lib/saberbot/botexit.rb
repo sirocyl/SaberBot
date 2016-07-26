@@ -5,10 +5,10 @@
 # Write our yml files and exit gracefully
 module SaberBot
   def self.botexit
-    SaberConfig.write_staff
-    SaberConfig.write_bans
-    SaberConfig.write_mutes
-    SaberConfig.write_noembeds
+    SaberConfig.write_yml('staff.yml', SaberConfig.roles)
+    SaberConfig.write_yml('bans.yml', SaberConfig.bans)
+    SaberConfig.write_yml('mutes.yml', SaberConfig.mutes)
+    SaberConfig.write_yml('noembeds.yml', SaberConfig.noembeds)
     BotObject.stop
     exit
   end
