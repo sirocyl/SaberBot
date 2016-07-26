@@ -42,8 +42,10 @@ module SaberBot
         max_args: 1
       ) do |event, user|
 
-        user = user.delete! '!'
-
+        if user.include? '!'
+          user = user.delete! '!'
+        end
+        
         if SaberConfig.friendcodes.filter(:user => event.message.author.mention).count == 0
           event.channel.send("You need to register a FC before looking up others!")
           break
