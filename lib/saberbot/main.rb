@@ -28,6 +28,7 @@ module SaberBot
   # 3dshacks commands
   BotObject.include! Command::RedditCommands
   BotObject.include! Command::Memes
+  BotObject.include! Command::Friendcodes
 
   # Event handlers
   BotObject.include! Event::LogJoin

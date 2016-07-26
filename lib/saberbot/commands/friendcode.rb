@@ -15,19 +15,23 @@ module SaberBot
         max_args: 1
       ) do |event, friendcode|
 
-        if SaberConfig.friendcodes.filter(:user => event.message.author).count == 0
-
-          SaberConfig.friendcodes.insert(
-            :user => "#{event.message.author.mention}",
-            :fc => "#{friendcode}"
-          )
-
+        if SaberConfig.friendcodes.filter(:user => event.message.author.mention).count == 0
+          if friendcode.gsub('-', '').match('^\d{12}$')
+            SaberConfig.friendcodes.insert(
+              :user => "#{event.message.author.mention}",
+              :fc => "#{friendcode}"
+            )
+          
+            event.channel.send("Successfully registered friendcode!")
+          else
+            event.channel.send("Invalid friendcode!")
+          end
+          
         else
 
           event.channel.send("Please delete your old FC before adding a new one!")
 
         end
-
       end
 
       command(
@@ -39,8 +43,13 @@ module SaberBot
       ) do |event, user|
 
 
-        if SaberConfig.friendcodes.filter(:user => event.message.author).count == 0
+        if SaberConfig.friendcodes.filter(:user => event.message.author.mention).count == 0
           event.channel.send("You need to register a FC before looking up others!")
+          break
+        end
+        
+        if SaberConfig.friendcodes.filter(:user => user).count == 0
+          event.channel.send("User does not have a friendcode registered!")
           break
         end
 
@@ -51,9 +60,8 @@ module SaberBot
 
         event.message.mentions[0].pm(
           "#{event.message.author.mention} has requested to add your 3ds friend code!\n\n" \
-          "Their FC is #{author_fc.each{ |entry| event.channel.send(entry[:fc]) }}"
+          "Their FC is #{author_fc.first[:fc]}"
           )
-
       end
 
       command(

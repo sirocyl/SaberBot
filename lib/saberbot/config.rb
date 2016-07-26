@@ -16,6 +16,7 @@ module SaberConfig
     attr_accessor :slowmode_maxmsgs
     attr_accessor :server_roles
     attr_accessor :server_channels
+    attr_accessor :friendcodes
   end
   SaberConfig.settings = {}
   SaberConfig.roles = {}
@@ -31,7 +32,7 @@ module SaberConfig
   SaberConfig.friendcodes = nil
 
   def self.read_yml(file)
-    if File.size("#{Dir.pwd}/data/#{file}")
+    if File.size?("#{Dir.pwd}/data/#{file}")
       return YAML.load_file("#{Dir.pwd}/data/#{file}")
     end
     {}
@@ -42,10 +43,10 @@ module SaberConfig
   end
 
   def self.read_database(file)
-    if File.size("sqlite://#{Dir.pwd}/data/#{file}")
+    if File.size?("#{Dir.pwd}/data/#{file}")
       return Sequel.connect("sqlite://#{Dir.pwd}/data/#{file}")
+    
     else
-
       db = Sequel.connect("sqlite://#{Dir.pwd}/data/#{file}")
       db.create_table :friendcodes do
         primary_id :id
