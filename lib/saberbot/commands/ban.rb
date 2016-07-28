@@ -10,7 +10,7 @@ module SaberBot
       command(
         :ban,
         description: "Ban a user. Staff only.\n" \
-        "Usage: `!ban <user> <time, ex: 30d1w9h50s> <reason>`",
+        'Usage: `!ban <user> <time, ex: 30d1w9h50s> <reason>`',
         min_args: 2
       ) do |event, _user|
         break if event.channel.private?
@@ -46,7 +46,7 @@ module SaberBot
 
             member.pm(
               "**You have been banned from #{event.server.name}!**\n" \
-              "**Expiry:** #{ChronicDuration.output(details[:time], :format => :short)} (#{DateTime.strptime(details[:stop_time].to_s, '%s')})\n" \
+              "**Expiry:** #{ChronicDuration.output(details[:time], format: :short)} (#{Time.at(details[:stop_time]).asctime})\n" \
               "**Responsible staff member:** #{event.author.mention}\n\n" \
               "**Reason:** #{reason}"
             )
@@ -54,7 +54,7 @@ module SaberBot
             event.server.ban(member)
             SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
               "**Banned:** #{details[:mention]} || #{details[:distinct]}\n" \
-              "**Time:** #{ChronicDuration.output(details[:time], :format => :short)}\n" \
+              "**Time:** #{ChronicDuration.output(details[:time], format: :short)}\n" \
               "**Reason:** #{details[:reason]}\n" \
               "**Responsible Moderator:** #{details[:staff]}"
             )
@@ -83,7 +83,7 @@ module SaberBot
           SaberConfig.bans.each do |uid, details|
             next unless target.eql?(details[:distinct])
             server = BotObject.servers[details[:sid]]
-            user = server.bans.find { |user| user.id == uid }
+            user = server.bans.find { |u| u.id == uid }
 
             server.unban(user)
             SaberConfig.server_channels[server][SaberConfig.settings['modlog_channel']].send(

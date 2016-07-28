@@ -32,30 +32,29 @@ module SaberConfig
   SaberConfig.friendcodes = nil
 
   def self.read_yml(file)
-    if File.size?("#{Dir.pwd}/data/#{file}")
-      return YAML.load_file("#{Dir.pwd}/data/#{file}")
+    if File.size?("#{Dir.pwd}/data/#{file}.yml")
+      return YAML.load_file("#{Dir.pwd}/data/#{file}.yml")
     end
     {}
   end
 
   def self.write_yml(file, data)
-    File.open("#{Dir.pwd}/data/#{file}", 'w') { |f| f.write data.to_yaml }
+    File.open("#{Dir.pwd}/data/#{file}.yml", 'w') { |f| f.write data.to_yaml }
   end
 
   def self.read_database(file)
-    if File.size?("#{Dir.pwd}/data/#{file}")
-      return Sequel.connect("sqlite://#{Dir.pwd}/data/#{file}")
-    
-    else
-      db = Sequel.connect("sqlite://#{Dir.pwd}/data/#{file}")
-      db.create_table :friendcodes do
-        primary_id :id
-        String :user
-        String :fc
-      end
+    filepath = "#{Dir.pwd}/data/#{file}.sqlite3"
+    initialized = File.size?(filepath)
+    db = Sequel.connect("sqlite://#{filepath}")
+    initialize_database(db) unless initialized
+    db
+  end
 
-      return db
-
+  def self.initialize_database(db)
+    db.create_table :friendcodes do
+      primary_key :id
+      String :user
+      String :fc
     end
   end
 end

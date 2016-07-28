@@ -3,4 +3,4 @@ data/staff.yml
 data/bans.yml
 data/mutes.yml
 data/noembeds.yml
-data/friendcodes.sql
+data/friendcodes.sqlite3

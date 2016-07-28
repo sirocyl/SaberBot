@@ -9,7 +9,7 @@ module SaberBot
       next unless details[:stop_time] <= Time.now.to_i
 
       server = BotObject.servers[details[:sid]]
-      user = server.bans.find { |user| user.id == uid }
+      user = server.bans.find { |u| u.id == uid }
 
       server.unban(user)
       SaberConfig.server_channels[server][SaberConfig.settings['modlog_channel']].send(
