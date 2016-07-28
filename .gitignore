@@ -1,6 +1,2 @@
-data/config.yml
-data/staff.yml
-data/bans.yml
-data/mutes.yml
-data/noembeds.yml
-data/friendcodes.sqlite3
+data/*.yml
+data/*.sqlite3
