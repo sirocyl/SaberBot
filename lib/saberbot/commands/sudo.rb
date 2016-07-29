@@ -14,12 +14,16 @@ module SaberBot
       ) do |event|
         break if event.channel.private?
 
-        if SaberConfig.roles[event.message.author.id]
-          role = event.server.role(SaberConfig.roles[event.message.author.id])
-          event.message.author.add_role(role)
+        member = event.server.member(event.message.author.id)
+        if SaberConfig.roles[member.id]
+          role = event.server.role(SaberConfig.roles[member.id])
+          member.add_role(role)
+          SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
+            "**Role Elevated:** #{member.mention} to #{role.name}"
+          )
           "Elevated to #{role.name}. Welcome to the twilight zone!"
         else
-          "Error: Your ID isn't saved in the sudo list!"
+          "Error: Your ID isn't saved in the sudo list."
         end
       end
 
@@ -30,12 +34,16 @@ module SaberBot
       ) do |event|
         break if event.channel.private?
 
-        if SaberConfig.roles[event.message.author.id]
-          role = event.server.role(SaberConfig.roles[event.message.author.id])
-          event.message.author.remove_role(role)
+        member = event.server.member(event.message.author.id)
+        if SaberConfig.roles[member.id]
+          role = event.server.role(SaberConfig.roles[member.id])
+          member.remove_role(role)
+          SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
+            "**Role De-elevated:** #{member.mention} from #{role.name}"
+          )
           "De-elevated from #{role.name}."
         else
-          "Error: Your ID isn't saved in the sudo list!"
+          "Error: Your ID isn't saved in the sudo list."
         end
       end
     end

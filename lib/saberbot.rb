@@ -16,7 +16,7 @@ require_relative 'saberbot/config'
 SaberConfig.settings = SaberConfig.read_yml('config')
 
 if SaberConfig.settings == {}
-  puts 'Config is empty! Please fix.'
+  puts 'Error: Empty or missing config.'
   exit
 end
 

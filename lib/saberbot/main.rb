@@ -35,7 +35,8 @@ module SaberBot
     Event::SetGameString,
     Event::BanCheckHeartbeat,
     Event::SlowmodeLoop,
-    Event::AutoPunish
+    Event::AutoPunish,
+    Event::LogRoleUpdate
   ]
 
   plugins.each { |p| BotObject.include!(p) }

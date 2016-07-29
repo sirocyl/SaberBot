@@ -22,6 +22,10 @@ module SaberBot
 
             member.add_role(SaberConfig.server_roles[event.server][SaberConfig.settings['staff_role']])
             SaberConfig.roles[member.id] = role.id
+            SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
+              "**Staff Addition:** #{member.mention} as #{role.name}\n" \
+              "**Responsible Moderator:** #{event.message.author.mention}"
+            )
             "User has been added as #{role.name}. Welcome aboard!"
           else
             'Invalid argument. Please specify a valid role.'
@@ -45,9 +49,13 @@ module SaberBot
             member.remove_role(event.server.role(SaberConfig.roles[member.id]))
             member.remove_role(SaberConfig.server_roles[event.server][SaberConfig.settings['staff_role']])
             SaberConfig.roles.delete(member.id)
+            SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
+              "**Staff Deletion:** #{member.mention}\n" \
+              "**Responsible Moderator:** #{event.message.author.mention}"
+            )
             "User has been removed from staff. See you!"
           else
-            "Error: target user ID isn't saved in the sudo list!"
+            "Error: target user ID isn't saved in the sudo list."
           end
         end
       end
