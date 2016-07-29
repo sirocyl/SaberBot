@@ -11,35 +11,34 @@ module SaberBot
     advanced_functionality: false
   )
 
-  # Admin commands
-  BotObject.include! Command::Exit
-  BotObject.include! Command::Staff
-  # Staff commands
-  BotObject.include! Command::Clear
-  BotObject.include! Command::Lockdown
-  BotObject.include! Command::Logs
-  BotObject.include! Command::Mute
-  BotObject.include! Command::NoEmbed
-  BotObject.include! Command::Probation
-  BotObject.include! Command::Slowmode
-  BotObject.include! Command::Sudo
-  BotObject.include! Command::Ban
-  BotObject.include! Command::Kick
-  # 3dshacks commands
-  BotObject.include! Command::RedditCommands
-  BotObject.include! Command::Memes
-  BotObject.include! Command::Friendcodes
+  plugins = [
+    Command::Exit,
+    Command::Staff,
+    Command::Clear,
+    Command::Lockdown,
+    Command::Logs,
+    Command::Mute,
+    Command::NoEmbed,
+    Command::Probation,
+    Command::Slowmode,
+    Command::Sudo,
+    Command::Ban,
+    Command::Kick,
+    Command::RedditCommands,
+    Command::Memes,
+    Command::Friendcodes,
+    Event::LogJoin,
+    Event::LogExit,
+    Event::AutoProbate,
+    Event::SlowmodeCounter,
+    Event::PopulateHashes,
+    Event::SetGameString,
+    Event::BanCheckHeartbeat,
+    Event::SlowmodeLoop,
+    Event::AutoPunish
+  ]
 
-  # Event handlers
-  BotObject.include! Event::LogJoin
-  BotObject.include! Event::LogExit
-  BotObject.include! Event::AutoProbate
-  BotObject.include! Event::SlowmodeCounter
-  BotObject.include! Event::PopulateHashes
-  BotObject.include! Event::SetGameString
-  BotObject.include! Event::BanCheckHeartbeat
-  BotObject.include! Event::SlowmodeLoop
-  BotObject.include! Event::AutoPunish
+  plugins.each { |p| BotObject.include!(p) }
 
   # Catch Ctrl-C and kill
   trap('SIGINT') { SaberBot.botexit }
