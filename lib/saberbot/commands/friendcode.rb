@@ -15,7 +15,7 @@ module SaberBot
         max_args: 1
       ) do |event, friendcode|
         if SaberConfig.friendcodes.filter(user: event.message.author.mention).count == 0
-          if SaberBot.valid_fc(friendcode)
+          if SaberBot.valid_fc?(friendcode)
             SaberConfig.friendcodes.insert(
               user: event.message.author.mention.to_s,
               fc: friendcode.to_s

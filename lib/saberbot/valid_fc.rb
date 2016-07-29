@@ -17,7 +17,7 @@ module SaberBot
     fc
   end
 
-  def self.valid_fc(fc_s)
+  def self.valid_fc?(fc_s)
     fc = fc_to_int(fc_s)
     return false unless fc
 
