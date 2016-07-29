@@ -59,7 +59,7 @@ module SaberBot
               "**Responsible Moderator:** #{details[:staff]}"
             )
             SaberConfig.bans[member.id] = details
-            nil
+            'User banned.'
           else
             'Invalid argument. Please mention a valid user.'
           end
@@ -92,7 +92,7 @@ module SaberBot
             )
             SaberConfig.bans.delete(uid)
           end
-          nil
+          'User unbanned.'
         else
           "You don't have permission to execute command `unban`!"
         end

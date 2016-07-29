@@ -21,14 +21,14 @@ module SaberBot
               fc: friendcode.to_s
             )
 
-            event.channel.send('Successfully registered friendcode!')
+            event.channel.send('Successfully registered friendcode.')
           else
-            event.channel.send('Invalid friendcode!')
+            event.channel.send('Invalid friendcode.')
           end
 
         else
 
-          event.channel.send('Please delete your old FC before adding a new one!')
+          event.channel.send('Please delete your old FC before adding a new one.')
 
         end
       end
@@ -43,12 +43,12 @@ module SaberBot
         user = user.delete! '!' if user.include? '!'
 
         if SaberConfig.friendcodes.filter(user: event.message.author.mention).count == 0
-          event.channel.send('You need to register a FC before looking up others!')
+          event.channel.send('You need to register a FC before looking up others.')
           break
         end
 
         if SaberConfig.friendcodes.filter(user: user).count == 0
-          event.channel.send('User does not have a friendcode registered!')
+          event.channel.send('User does not have a friendcode registered.')
           break
         end
 
@@ -58,8 +58,8 @@ module SaberBot
         author_fc = SaberConfig.friendcodes.filter(user: event.message.author.mention)
 
         event.message.mentions[0].pm(
-          "#{event.message.author.mention} has requested to add your 3ds friend code!\n\n" \
-          "Their FC is #{author_fc.first[:fc]}"
+          "#{event.message.author.mention} has requested to add your 3DS friend code.\n\n" \
+          "Their FC is: #{author_fc.first[:fc]}"
         )
       end
 

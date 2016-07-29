@@ -17,7 +17,7 @@ module SaberBot
         if SaberConfig.roles[event.message.author.id]
           role = event.server.role(SaberConfig.roles[event.message.author.id])
           event.message.author.add_role(role)
-          "Elevated #{event.message.author.mention} to #{role.name}. Welcome to the twilight zone!"
+          "Elevated to #{role.name}. Welcome to the twilight zone!"
         else
           "Error: Your ID isn't saved in the sudo list!"
         end
@@ -33,7 +33,7 @@ module SaberBot
         if SaberConfig.roles[event.message.author.id]
           role = event.server.role(SaberConfig.roles[event.message.author.id])
           event.message.author.remove_role(role)
-          "De-elevated #{event.message.author.mention} from #{role.name}."
+          "De-elevated from #{role.name}."
         else
           "Error: Your ID isn't saved in the sudo list!"
         end

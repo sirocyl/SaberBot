@@ -46,7 +46,7 @@ module SaberBot
               "**Reason:** #{details[:reason]}\n" \
               "**Responsible Moderator:** #{details[:staff]}"
             )
-            nil
+            'User kicked.'
           else
             'Invalid argument. Please mention a valid user.'
           end

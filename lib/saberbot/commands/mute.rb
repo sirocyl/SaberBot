@@ -25,7 +25,7 @@ module SaberBot
           }
 
           member.add_role(SaberConfig.server_roles[event.server][SaberConfig.settings['mute_role']])
-          event.channel.send("Muted #{details[:mention]}.")
+          event.channel.send("Muted user.")
           SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
             "**Muted:** #{details[:mention]} || #{details[:distinct]}\n" \
             "**Responsible Moderator:** #{details[:staff]}"
@@ -43,7 +43,7 @@ module SaberBot
           member = event.server.member(event.message.mentions[0].id)
 
           member.remove_role(SaberConfig.server_roles[event.server][SaberConfig.settings['mute_role']])
-          event.channel.send("Unmuted #{member.mention}.")
+          event.channel.send("Unmuted user.")
           SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
             "**Unmuted:** #{member.mention} || #{member.distinct}\n" \
             "**Responsible Moderator:** #{event.message.author.mention}"
