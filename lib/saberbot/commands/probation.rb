@@ -17,7 +17,7 @@ module SaberBot
             "**Probation Placed:** #{member.mention} || #{member.distinct}\n" \
             "**Responsible Moderator:** #{event.message.author.mention}"
           )
-          "Added user to probation."
+          'Added user to probation.'
         else
           'Invalid argument. Please mention a valid user.'
         end
@@ -33,7 +33,7 @@ module SaberBot
             "**Probation Lifted:** #{member.mention} || #{member.distinct}\n" \
             "**Responsible Moderator:** #{event.message.author.mention}"
           )
-          "Removed user from probation."
+          'Removed user from probation.'
         else
           'Invalid argument. Please mention a valid user.'
         end

@@ -53,7 +53,7 @@ module SaberBot
               "**Staff Deletion:** #{member.mention}\n" \
               "**Responsible Moderator:** #{event.message.author.mention}"
             )
-            "User has been removed from staff. See you!"
+            'User has been removed from staff. See you!'
           else
             "Error: target user ID isn't saved in the sudo list."
           end

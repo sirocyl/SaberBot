@@ -10,7 +10,7 @@ module SaberBot
       member_update do |event|
         member = event.server.member(event.user.id)
         roles = member.roles
-        list = Array.new
+        list = []
         roles.each { |r| list.push("#{r.name} (#{r.id})") }
         SaberConfig.server_channels[event.server][SaberConfig.settings['modlog_channel']].send(
           "**Role Update:** #{member.mention} || #{member.distinct}\n" \
