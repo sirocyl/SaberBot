@@ -61,7 +61,7 @@ module SaberBot
           event.message.mentions[0].pm(
             "#{event.message.author.mention} has requested to add your 3DS friend code.\n\n" \
             "Their FC is: #{author_fc.first[:fc]}"
-            )
+          )
         else
           'Invalid argument. Please mention a valid user.'
         end
