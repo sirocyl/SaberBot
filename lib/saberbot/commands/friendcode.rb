@@ -42,25 +42,29 @@ module SaberBot
       ) do |event, user|
         user = user.delete! '!' if user.include? '!'
 
-        if SaberConfig.friendcodes.filter(user: event.message.author.mention).count == 0
-          event.channel.send('You need to register a FC before looking up others.')
-          break
+        if event.message.mentions[0]
+          if SaberConfig.friendcodes.filter(user: event.message.author.mention).count == 0
+            event.channel.send('You need to register a FC before looking up others.')
+            break
+          end
+
+          if SaberConfig.friendcodes.filter(user: user).count == 0
+            event.channel.send('User does not have a friendcode registered.')
+            break
+          end
+
+          user_fc = SaberConfig.friendcodes.filter(user: user)
+          user_fc.each { |entry| event.channel.send("User's friend code is: #{entry[:fc]}") }
+
+          author_fc = SaberConfig.friendcodes.filter(user: event.message.author.mention)
+
+          event.message.mentions[0].pm(
+            "#{event.message.author.mention} has requested to add your 3DS friend code.\n\n" \
+            "Their FC is: #{author_fc.first[:fc]}"
+            )
+        else
+          'Invalid argument. Please mention a valid user.'
         end
-
-        if SaberConfig.friendcodes.filter(user: user).count == 0
-          event.channel.send('User does not have a friendcode registered.')
-          break
-        end
-
-        user_fc = SaberConfig.friendcodes.filter(user: user)
-        user_fc.each { |entry| event.channel.send(entry[:fc]) }
-
-        author_fc = SaberConfig.friendcodes.filter(user: event.message.author.mention)
-
-        event.message.mentions[0].pm(
-          "#{event.message.author.mention} has requested to add your 3DS friend code.\n\n" \
-          "Their FC is: #{author_fc.first[:fc]}"
-        )
       end
 
       command(
