@@ -1,8 +1,12 @@
-# SaberBot  
-A powerful discord bot made with https://github.com/meew0/discordrb  
+# Yumetarō
+![Good Morning!](http://i.imgur.com/bqA1MYr.png)
+
+A rather gimmicky discord bot for the associated Famicom/FamiTracker communities.
+
+Made with https://github.com/meew0/discordrb, based on [SaberBot](https://github.com/megumisonoda/SaberBot), by [Megumi Sonoda](https://github.com/megumisonoda)
 
 ## Features  
-TBD
+¯\\\_(ツ)\_/¯
 
 ## Credits
 * Alex Taber ([GitHub](https://github.com/astronautlevel2), [Twitter](https://twitter.com/astronautlevel2))
